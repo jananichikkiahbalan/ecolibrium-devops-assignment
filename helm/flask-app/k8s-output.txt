@@ -1,0 +1,13 @@
+NAME                            READY   STATUS    RESTARTS   AGE
+pod/flask-app-b9c748b54-4s8w2   1/1     Running   0          34m
+pod/flask-app-b9c748b54-67jkx   1/1     Running   0          34m
+
+NAME                        TYPE           CLUSTER-IP     EXTERNAL-IP                                                               PORT(S)          AGE
+service/flask-app-service   LoadBalancer   172.20.3.140   a2603ba7ed3bd49259623bd29ae5b2f5-692256566.ap-south-1.elb.amazonaws.com   5000:31585/TCP   34m
+service/kubernetes          ClusterIP      172.20.0.1     <none>                                                                    443/TCP          62m
+
+NAME                        READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/flask-app   2/2     2            2           34m
+
+NAME                                  DESIRED   CURRENT   READY   AGE
+replicaset.apps/flask-app-b9c748b54   2         2         2       34m

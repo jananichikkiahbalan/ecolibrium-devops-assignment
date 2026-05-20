@@ -1,0 +1,2 @@
+NAME     	NAMESPACE	REVISION	UPDATED                                	STATUS  	CHART          	APP VERSION
+flask-app	default  	1       	2026-05-20 06:45:08.980725576 +0000 UTC	deployed	flask-app-0.1.0	1.0        
