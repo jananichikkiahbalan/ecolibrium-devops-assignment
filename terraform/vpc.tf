@@ -19,7 +19,7 @@ resource "aws_subnet" "public_1" {
 
     "kubernetes.io/role/elb" = "1"
 
-    "kubernetes.io/cluster/ecolibrium-eks" = "shared"
+    "kubernetes.io/cluster/ecolibrium-dev-eks" = "shared"
   }
 }
 
@@ -34,7 +34,7 @@ resource "aws_subnet" "public_2" {
 
     "kubernetes.io/role/elb" = "1"
 
-    "kubernetes.io/cluster/ecolibrium-eks" = "shared"
+    "kubernetes.io/cluster/ecolibrium-dev-eks" = "shared"
   }
 }
 
@@ -48,7 +48,7 @@ resource "aws_subnet" "private_1" {
 
     "kubernetes.io/role/internal-elb" = "1"
 
-    "kubernetes.io/cluster/ecolibrium-eks" = "shared"
+    "kubernetes.io/cluster/ecolibrium-dev-eks" = "shared"
   }
 }
 
@@ -62,7 +62,7 @@ resource "aws_subnet" "private_2" {
 
     "kubernetes.io/role/internal-elb" = "1"
 
-    "kubernetes.io/cluster/ecolibrium-eks" = "shared"
+    "kubernetes.io/cluster/ecolibrium-dev-eks" = "shared"
   }
 }
 
