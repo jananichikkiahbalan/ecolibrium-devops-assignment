@@ -1,0 +1,57 @@
+replicaCount: 2
+
+image:
+  repository: 425629233235.dkr.ecr.ap-south-1.amazonaws.com/ecolibrium-flask-app
+  pullPolicy: Always
+  tag: "latest"
+
+service:
+  type: LoadBalancer
+  port: 5000
+
+containerPort: 5000
+
+ingress:
+  enabled: false
+  className: nginx
+
+  annotations: {}
+
+  hosts:
+  - host: flask.local
+    paths:
+    - path: /
+      pathType: Prefix
+
+config:
+  APP_ENV: production
+  APP_NAME: flask-app
+
+env:
+  ENVIRONMENT: production
+
+volumeMounts:
+  mountPath: /app/config
+
+livenessProbe:
+  path: /health
+  initialDelaySeconds: 10
+  periodSeconds: 10
+  timeoutSeconds: 5
+  failureThreshold: 3
+
+readinessProbe:
+  path: /health
+  initialDelaySeconds: 5
+  periodSeconds: 5
+  timeoutSeconds: 5
+  failureThreshold: 3
+
+resources:
+  requests:
+    cpu: "100m"
+    memory: "128Mi"
+
+  limits:
+    cpu: "200m"
+    memory: "256Mi"
