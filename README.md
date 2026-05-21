@@ -257,6 +257,9 @@ Created Helm chart with:
 - Liveness Probes
 - Readiness Probes
 
+    Note: Ingress resource is implemented in Helm chart with ingress.enabled = false. 
+    Application is exposed through LoadBalancer service for reliable accessibility.
+
 Successfully verified:
 - Pods
 - Services
