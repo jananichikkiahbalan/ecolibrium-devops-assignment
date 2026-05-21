@@ -435,6 +435,10 @@ kubectl get svc
 
 ![Jenkins Pipeline](screenshots/jenkins-pipeline-success.png)
 
+## Jenkins Console Output
+Full Jenkins pipeline console output available here:
+[Jenkins Console Output](jenkins-output/jenkins-console-output.txt)
+
 ---
 
 ## Jenkins Dashboard
