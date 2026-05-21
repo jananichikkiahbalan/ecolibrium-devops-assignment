@@ -1,0 +1,831 @@
+Started by user srijanani
+Obtained Jenkinsfile from git https://github.com/jananichikkiahbalan/ecolibrium-devops-assignment
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in /var/lib/jenkins/workspace/ecolibrium-devops-pipeline
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+No credentials specified
+ > git rev-parse --resolve-git-dir /var/lib/jenkins/workspace/ecolibrium-devops-pipeline/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/jananichikkiahbalan/ecolibrium-devops-assignment # timeout=10
+Fetching upstream changes from https://github.com/jananichikkiahbalan/ecolibrium-devops-assignment
+ > git --version # timeout=10
+ > git --version # 'git version 2.43.0'
+ > git fetch --tags --force --progress -- https://github.com/jananichikkiahbalan/ecolibrium-devops-assignment +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/main^{commit} # timeout=10
+Checking out Revision 656826aa1570cb24e7d5541ab1e78525ac6150cb (refs/remotes/origin/main)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 656826aa1570cb24e7d5541ab1e78525ac6150cb # timeout=10
+Commit message: "updated jenkinsfile"
+ > git rev-list --no-walk 656826aa1570cb24e7d5541ab1e78525ac6150cb # timeout=10
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Checkout Code)
+[Pipeline] git
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+No credentials specified
+ > git rev-parse --resolve-git-dir /var/lib/jenkins/workspace/ecolibrium-devops-pipeline/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/jananichikkiahbalan/ecolibrium-devops-assignment.git # timeout=10
+Fetching upstream changes from https://github.com/jananichikkiahbalan/ecolibrium-devops-assignment.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.43.0'
+ > git fetch --tags --force --progress -- https://github.com/jananichikkiahbalan/ecolibrium-devops-assignment.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/main^{commit} # timeout=10
+Checking out Revision 656826aa1570cb24e7d5541ab1e78525ac6150cb (refs/remotes/origin/main)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 656826aa1570cb24e7d5541ab1e78525ac6150cb # timeout=10
+ > git branch -a -v --no-abbrev # timeout=10
+ > git branch -D main # timeout=10
+ > git checkout -b main 656826aa1570cb24e7d5541ab1e78525ac6150cb # timeout=10
+Commit message: "updated jenkinsfile"
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Terraform Init)
+[Pipeline] dir
+Running in /var/lib/jenkins/workspace/ecolibrium-devops-pipeline/terraform
+[Pipeline] {
+[Pipeline] sh
++ terraform init
+[0m[1mInitializing provider plugins found in the configuration...[0m
+- Reusing previous version of hashicorp/aws from the dependency lock file
+- Using previously-installed hashicorp/aws v5.100.0
+
+[0m[1mInitializing the backend...[0m
+
+[0m[1mInitializing provider plugins found in the state...[0m
+- Reusing previous version of hashicorp/aws
+- Using previously-installed hashicorp/aws v5.100.0
+
+
+[0m[1m[32mTerraform has been successfully initialized![0m[32m[0m
+[0m[32m
+You may now begin working with Terraform. Try running "terraform plan" to see
+any changes that are required for your infrastructure. All Terraform commands
+should now work.
+
+If you ever set or change modules or backend configuration for Terraform,
+rerun this command to reinitialize your working directory. If you forget, other
+commands will detect it and remind you to do so if necessary.[0m
+[Pipeline] }
+[Pipeline] // dir
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Terraform Apply)
+[Pipeline] dir
+Running in /var/lib/jenkins/workspace/ecolibrium-devops-pipeline/terraform
+[Pipeline] {
+[Pipeline] sh
++ terraform apply -auto-approve
+[0m[1maws_ecr_repository.main: Refreshing state... [id=ecolibrium-flask-app][0m
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  [32m+[0m create[0m
+
+Terraform will perform the following actions:
+
+[1m  # aws_eip.nat_eip[0m will be created
+[0m  [32m+[0m[0m resource "aws_eip" "nat_eip" {
+      [32m+[0m[0m allocation_id        = (known after apply)
+      [32m+[0m[0m arn                  = (known after apply)
+      [32m+[0m[0m association_id       = (known after apply)
+      [32m+[0m[0m carrier_ip           = (known after apply)
+      [32m+[0m[0m customer_owned_ip    = (known after apply)
+      [32m+[0m[0m domain               = "vpc"
+      [32m+[0m[0m id                   = (known after apply)
+      [32m+[0m[0m instance             = (known after apply)
+      [32m+[0m[0m ipam_pool_id         = (known after apply)
+      [32m+[0m[0m network_border_group = (known after apply)
+      [32m+[0m[0m network_interface    = (known after apply)
+      [32m+[0m[0m private_dns          = (known after apply)
+      [32m+[0m[0m private_ip           = (known after apply)
+      [32m+[0m[0m ptr_record           = (known after apply)
+      [32m+[0m[0m public_dns           = (known after apply)
+      [32m+[0m[0m public_ip            = (known after apply)
+      [32m+[0m[0m public_ipv4_pool     = (known after apply)
+      [32m+[0m[0m tags                 = {
+          [32m+[0m[0m "Name" = "ecolibrium-dev-nat-eip"
+        }
+      [32m+[0m[0m tags_all             = {
+          [32m+[0m[0m "Name" = "ecolibrium-dev-nat-eip"
+        }
+      [32m+[0m[0m vpc                  = (known after apply)
+    }
+
+[1m  # aws_eks_cluster.main[0m will be created
+[0m  [32m+[0m[0m resource "aws_eks_cluster" "main" {
+      [32m+[0m[0m arn                           = (known after apply)
+      [32m+[0m[0m bootstrap_self_managed_addons = true
+      [32m+[0m[0m certificate_authority         = (known after apply)
+      [32m+[0m[0m cluster_id                    = (known after apply)
+      [32m+[0m[0m created_at                    = (known after apply)
+      [32m+[0m[0m endpoint                      = (known after apply)
+      [32m+[0m[0m id                            = (known after apply)
+      [32m+[0m[0m identity                      = (known after apply)
+      [32m+[0m[0m name                          = "ecolibrium-dev-eks"
+      [32m+[0m[0m platform_version              = (known after apply)
+      [32m+[0m[0m role_arn                      = (known after apply)
+      [32m+[0m[0m status                        = (known after apply)
+      [32m+[0m[0m tags                          = {
+          [32m+[0m[0m "Name" = "ecolibrium-dev-eks"
+        }
+      [32m+[0m[0m tags_all                      = {
+          [32m+[0m[0m "Name" = "ecolibrium-dev-eks"
+        }
+      [32m+[0m[0m version                       = "1.33"
+
+      [32m+[0m[0m access_config (known after apply)
+
+      [32m+[0m[0m kubernetes_network_config (known after apply)
+
+      [32m+[0m[0m upgrade_policy (known after apply)
+
+      [32m+[0m[0m vpc_config {
+          [32m+[0m[0m cluster_security_group_id = (known after apply)
+          [32m+[0m[0m endpoint_private_access   = false
+          [32m+[0m[0m endpoint_public_access    = true
+          [32m+[0m[0m public_access_cidrs       = (known after apply)
+          [32m+[0m[0m subnet_ids                = (known after apply)
+          [32m+[0m[0m vpc_id                    = (known after apply)
+        }
+    }
+
+[1m  # aws_eks_node_group.main[0m will be created
+[0m  [32m+[0m[0m resource "aws_eks_node_group" "main" {
+      [32m+[0m[0m ami_type               = (known after apply)
+      [32m+[0m[0m arn                    = (known after apply)
+      [32m+[0m[0m capacity_type          = "ON_DEMAND"
+      [32m+[0m[0m cluster_name           = "ecolibrium-dev-eks"
+      [32m+[0m[0m disk_size              = (known after apply)
+      [32m+[0m[0m id                     = (known after apply)
+      [32m+[0m[0m instance_types         = [
+          [32m+[0m[0m "t3.small",
+        ]
+      [32m+[0m[0m node_group_name        = "ecolibrium-dev-node-group"
+      [32m+[0m[0m node_group_name_prefix = (known after apply)
+      [32m+[0m[0m node_role_arn          = (known after apply)
+      [32m+[0m[0m release_version        = (known after apply)
+      [32m+[0m[0m resources              = (known after apply)
+      [32m+[0m[0m status                 = (known after apply)
+      [32m+[0m[0m subnet_ids             = (known after apply)
+      [32m+[0m[0m tags                   = {
+          [32m+[0m[0m "Name" = "ecolibrium-dev-node-group"
+        }
+      [32m+[0m[0m tags_all               = {
+          [32m+[0m[0m "Name" = "ecolibrium-dev-node-group"
+        }
+      [32m+[0m[0m version                = (known after apply)
+
+      [32m+[0m[0m node_repair_config (known after apply)
+
+      [32m+[0m[0m scaling_config {
+          [32m+[0m[0m desired_size = 2
+          [32m+[0m[0m max_size     = 2
+          [32m+[0m[0m min_size     = 1
+        }
+
+      [32m+[0m[0m update_config (known after apply)
+    }
+
+[1m  # aws_iam_role.eks_cluster_role[0m will be created
+[0m  [32m+[0m[0m resource "aws_iam_role" "eks_cluster_role" {
+      [32m+[0m[0m arn                   = (known after apply)
+      [32m+[0m[0m assume_role_policy    = jsonencode(
+            {
+              [32m+[0m[0m Statement = [
+                  [32m+[0m[0m {
+                      [32m+[0m[0m Action    = "sts:AssumeRole"
+                      [32m+[0m[0m Effect    = "Allow"
+                      [32m+[0m[0m Principal = {
+                          [32m+[0m[0m Service = "eks.amazonaws.com"
+                        }
+                    },
+                ]
+              [32m+[0m[0m Version   = "2012-10-17"
+            }
+        )
+      [32m+[0m[0m create_date           = (known after apply)
+      [32m+[0m[0m force_detach_policies = false
+      [32m+[0m[0m id                    = (known after apply)
+      [32m+[0m[0m managed_policy_arns   = (known after apply)
+      [32m+[0m[0m max_session_duration  = 3600
+      [32m+[0m[0m name                  = "ecolibrium-dev-eks-cluster-role"
+      [32m+[0m[0m name_prefix           = (known after apply)
+      [32m+[0m[0m path                  = "/"
+      [32m+[0m[0m tags_all              = (known after apply)
+      [32m+[0m[0m unique_id             = (known after apply)
+
+      [32m+[0m[0m inline_policy (known after apply)
+    }
+
+[1m  # aws_iam_role.eks_nodegroup_role[0m will be created
+[0m  [32m+[0m[0m resource "aws_iam_role" "eks_nodegroup_role" {
+      [32m+[0m[0m arn                   = (known after apply)
+      [32m+[0m[0m assume_role_policy    = jsonencode(
+            {
+              [32m+[0m[0m Statement = [
+                  [32m+[0m[0m {
+                      [32m+[0m[0m Action    = "sts:AssumeRole"
+                      [32m+[0m[0m Effect    = "Allow"
+                      [32m+[0m[0m Principal = {
+                          [32m+[0m[0m Service = "ec2.amazonaws.com"
+                        }
+                    },
+                ]
+              [32m+[0m[0m Version   = "2012-10-17"
+            }
+        )
+      [32m+[0m[0m create_date           = (known after apply)
+      [32m+[0m[0m force_detach_policies = false
+      [32m+[0m[0m id                    = (known after apply)
+      [32m+[0m[0m managed_policy_arns   = (known after apply)
+      [32m+[0m[0m max_session_duration  = 3600
+      [32m+[0m[0m name                  = "ecolibrium-dev-eks-nodegroup-role"
+      [32m+[0m[0m name_prefix           = (known after apply)
+      [32m+[0m[0m path                  = "/"
+      [32m+[0m[0m tags_all              = (known after apply)
+      [32m+[0m[0m unique_id             = (known after apply)
+
+      [32m+[0m[0m inline_policy (known after apply)
+    }
+
+[1m  # aws_iam_role_policy_attachment.cni_policy[0m will be created
+[0m  [32m+[0m[0m resource "aws_iam_role_policy_attachment" "cni_policy" {
+      [32m+[0m[0m id         = (known after apply)
+      [32m+[0m[0m policy_arn = "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy"
+      [32m+[0m[0m role       = "ecolibrium-dev-eks-nodegroup-role"
+    }
+
+[1m  # aws_iam_role_policy_attachment.ecr_policy[0m will be created
+[0m  [32m+[0m[0m resource "aws_iam_role_policy_attachment" "ecr_policy" {
+      [32m+[0m[0m id         = (known after apply)
+      [32m+[0m[0m policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
+      [32m+[0m[0m role       = "ecolibrium-dev-eks-nodegroup-role"
+    }
+
+[1m  # aws_iam_role_policy_attachment.eks_cluster_policy[0m will be created
+[0m  [32m+[0m[0m resource "aws_iam_role_policy_attachment" "eks_cluster_policy" {
+      [32m+[0m[0m id         = (known after apply)
+      [32m+[0m[0m policy_arn = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
+      [32m+[0m[0m role       = "ecolibrium-dev-eks-cluster-role"
+    }
+
+[1m  # aws_iam_role_policy_attachment.worker_node_policy[0m will be created
+[0m  [32m+[0m[0m resource "aws_iam_role_policy_attachment" "worker_node_policy" {
+      [32m+[0m[0m id         = (known after apply)
+      [32m+[0m[0m policy_arn = "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy"
+      [32m+[0m[0m role       = "ecolibrium-dev-eks-nodegroup-role"
+    }
+
+[1m  # aws_internet_gateway.igw[0m will be created
+[0m  [32m+[0m[0m resource "aws_internet_gateway" "igw" {
+      [32m+[0m[0m arn      = (known after apply)
+      [32m+[0m[0m id       = (known after apply)
+      [32m+[0m[0m owner_id = (known after apply)
+      [32m+[0m[0m tags     = {
+          [32m+[0m[0m "Name" = "ecolibrium-dev-igw"
+        }
+      [32m+[0m[0m tags_all = {
+          [32m+[0m[0m "Name" = "ecolibrium-dev-igw"
+        }
+      [32m+[0m[0m vpc_id   = (known after apply)
+    }
+
+[1m  # aws_nat_gateway.nat[0m will be created
+[0m  [32m+[0m[0m resource "aws_nat_gateway" "nat" {
+      [32m+[0m[0m allocation_id                      = (known after apply)
+      [32m+[0m[0m association_id                     = (known after apply)
+      [32m+[0m[0m connectivity_type                  = "public"
+      [32m+[0m[0m id                                 = (known after apply)
+      [32m+[0m[0m network_interface_id               = (known after apply)
+      [32m+[0m[0m private_ip                         = (known after apply)
+      [32m+[0m[0m public_ip                          = (known after apply)
+      [32m+[0m[0m secondary_private_ip_address_count = (known after apply)
+      [32m+[0m[0m secondary_private_ip_addresses     = (known after apply)
+      [32m+[0m[0m subnet_id                          = (known after apply)
+      [32m+[0m[0m tags                               = {
+          [32m+[0m[0m "Name" = "ecolibrium-dev-nat-gateway"
+        }
+      [32m+[0m[0m tags_all                           = {
+          [32m+[0m[0m "Name" = "ecolibrium-dev-nat-gateway"
+        }
+    }
+
+[1m  # aws_route_table.private_rt[0m will be created
+[0m  [32m+[0m[0m resource "aws_route_table" "private_rt" {
+      [32m+[0m[0m arn              = (known after apply)
+      [32m+[0m[0m id               = (known after apply)
+      [32m+[0m[0m owner_id         = (known after apply)
+      [32m+[0m[0m propagating_vgws = (known after apply)
+      [32m+[0m[0m route            = [
+          [32m+[0m[0m {
+              [32m+[0m[0m cidr_block                 = "0.0.0.0/0"
+              [32m+[0m[0m nat_gateway_id             = (known after apply)
+                [90m# (11 unchanged attributes hidden)[0m[0m
+            },
+        ]
+      [32m+[0m[0m tags             = {
+          [32m+[0m[0m "Name" = "ecolibrium-dev-private-rt"
+        }
+      [32m+[0m[0m tags_all         = {
+          [32m+[0m[0m "Name" = "ecolibrium-dev-private-rt"
+        }
+      [32m+[0m[0m vpc_id           = (known after apply)
+    }
+
+[1m  # aws_route_table.public_rt[0m will be created
+[0m  [32m+[0m[0m resource "aws_route_table" "public_rt" {
+      [32m+[0m[0m arn              = (known after apply)
+      [32m+[0m[0m id               = (known after apply)
+      [32m+[0m[0m owner_id         = (known after apply)
+      [32m+[0m[0m propagating_vgws = (known after apply)
+      [32m+[0m[0m route            = [
+          [32m+[0m[0m {
+              [32m+[0m[0m cidr_block                 = "0.0.0.0/0"
+              [32m+[0m[0m gateway_id                 = (known after apply)
+                [90m# (11 unchanged attributes hidden)[0m[0m
+            },
+        ]
+      [32m+[0m[0m tags             = {
+          [32m+[0m[0m "Name" = "ecolibrium-dev-public-rt"
+        }
+      [32m+[0m[0m tags_all         = {
+          [32m+[0m[0m "Name" = "ecolibrium-dev-public-rt"
+        }
+      [32m+[0m[0m vpc_id           = (known after apply)
+    }
+
+[1m  # aws_route_table_association.private_1_assoc[0m will be created
+[0m  [32m+[0m[0m resource "aws_route_table_association" "private_1_assoc" {
+      [32m+[0m[0m id             = (known after apply)
+      [32m+[0m[0m route_table_id = (known after apply)
+      [32m+[0m[0m subnet_id      = (known after apply)
+    }
+
+[1m  # aws_route_table_association.private_2_assoc[0m will be created
+[0m  [32m+[0m[0m resource "aws_route_table_association" "private_2_assoc" {
+      [32m+[0m[0m id             = (known after apply)
+      [32m+[0m[0m route_table_id = (known after apply)
+      [32m+[0m[0m subnet_id      = (known after apply)
+    }
+
+[1m  # aws_route_table_association.public_1_assoc[0m will be created
+[0m  [32m+[0m[0m resource "aws_route_table_association" "public_1_assoc" {
+      [32m+[0m[0m id             = (known after apply)
+      [32m+[0m[0m route_table_id = (known after apply)
+      [32m+[0m[0m subnet_id      = (known after apply)
+    }
+
+[1m  # aws_route_table_association.public_2_assoc[0m will be created
+[0m  [32m+[0m[0m resource "aws_route_table_association" "public_2_assoc" {
+      [32m+[0m[0m id             = (known after apply)
+      [32m+[0m[0m route_table_id = (known after apply)
+      [32m+[0m[0m subnet_id      = (known after apply)
+    }
+
+[1m  # aws_subnet.private_1[0m will be created
+[0m  [32m+[0m[0m resource "aws_subnet" "private_1" {
+      [32m+[0m[0m arn                                            = (known after apply)
+      [32m+[0m[0m assign_ipv6_address_on_creation                = false
+      [32m+[0m[0m availability_zone                              = "ap-south-1a"
+      [32m+[0m[0m availability_zone_id                           = (known after apply)
+      [32m+[0m[0m cidr_block                                     = "10.0.3.0/24"
+      [32m+[0m[0m enable_dns64                                   = false
+      [32m+[0m[0m enable_resource_name_dns_a_record_on_launch    = false
+      [32m+[0m[0m enable_resource_name_dns_aaaa_record_on_launch = false
+      [32m+[0m[0m id                                             = (known after apply)
+      [32m+[0m[0m ipv6_cidr_block_association_id                 = (known after apply)
+      [32m+[0m[0m ipv6_native                                    = false
+      [32m+[0m[0m map_public_ip_on_launch                        = false
+      [32m+[0m[0m owner_id                                       = (known after apply)
+      [32m+[0m[0m private_dns_hostname_type_on_launch            = (known after apply)
+      [32m+[0m[0m tags                                           = {
+          [32m+[0m[0m "Name"                                     = "ecolibrium-dev-private-subnet-1"
+          [32m+[0m[0m "kubernetes.io/cluster/ecolibrium-dev-eks" = "shared"
+          [32m+[0m[0m "kubernetes.io/role/internal-elb"          = "1"
+        }
+      [32m+[0m[0m tags_all                                       = {
+          [32m+[0m[0m "Name"                                     = "ecolibrium-dev-private-subnet-1"
+          [32m+[0m[0m "kubernetes.io/cluster/ecolibrium-dev-eks" = "shared"
+          [32m+[0m[0m "kubernetes.io/role/internal-elb"          = "1"
+        }
+      [32m+[0m[0m vpc_id                                         = (known after apply)
+    }
+
+[1m  # aws_subnet.private_2[0m will be created
+[0m  [32m+[0m[0m resource "aws_subnet" "private_2" {
+      [32m+[0m[0m arn                                            = (known after apply)
+      [32m+[0m[0m assign_ipv6_address_on_creation                = false
+      [32m+[0m[0m availability_zone                              = "ap-south-1b"
+      [32m+[0m[0m availability_zone_id                           = (known after apply)
+      [32m+[0m[0m cidr_block                                     = "10.0.4.0/24"
+      [32m+[0m[0m enable_dns64                                   = false
+      [32m+[0m[0m enable_resource_name_dns_a_record_on_launch    = false
+      [32m+[0m[0m enable_resource_name_dns_aaaa_record_on_launch = false
+      [32m+[0m[0m id                                             = (known after apply)
+      [32m+[0m[0m ipv6_cidr_block_association_id                 = (known after apply)
+      [32m+[0m[0m ipv6_native                                    = false
+      [32m+[0m[0m map_public_ip_on_launch                        = false
+      [32m+[0m[0m owner_id                                       = (known after apply)
+      [32m+[0m[0m private_dns_hostname_type_on_launch            = (known after apply)
+      [32m+[0m[0m tags                                           = {
+          [32m+[0m[0m "Name"                                     = "ecolibrium-dev-private-subnet-2"
+          [32m+[0m[0m "kubernetes.io/cluster/ecolibrium-dev-eks" = "shared"
+          [32m+[0m[0m "kubernetes.io/role/internal-elb"          = "1"
+        }
+      [32m+[0m[0m tags_all                                       = {
+          [32m+[0m[0m "Name"                                     = "ecolibrium-dev-private-subnet-2"
+          [32m+[0m[0m "kubernetes.io/cluster/ecolibrium-dev-eks" = "shared"
+          [32m+[0m[0m "kubernetes.io/role/internal-elb"          = "1"
+        }
+      [32m+[0m[0m vpc_id                                         = (known after apply)
+    }
+
+[1m  # aws_subnet.public_1[0m will be created
+[0m  [32m+[0m[0m resource "aws_subnet" "public_1" {
+      [32m+[0m[0m arn                                            = (known after apply)
+      [32m+[0m[0m assign_ipv6_address_on_creation                = false
+      [32m+[0m[0m availability_zone                              = "ap-south-1a"
+      [32m+[0m[0m availability_zone_id                           = (known after apply)
+      [32m+[0m[0m cidr_block                                     = "10.0.1.0/24"
+      [32m+[0m[0m enable_dns64                                   = false
+      [32m+[0m[0m enable_resource_name_dns_a_record_on_launch    = false
+      [32m+[0m[0m enable_resource_name_dns_aaaa_record_on_launch = false
+      [32m+[0m[0m id                                             = (known after apply)
+      [32m+[0m[0m ipv6_cidr_block_association_id                 = (known after apply)
+      [32m+[0m[0m ipv6_native                                    = false
+      [32m+[0m[0m map_public_ip_on_launch                        = true
+      [32m+[0m[0m owner_id                                       = (known after apply)
+      [32m+[0m[0m private_dns_hostname_type_on_launch            = (known after apply)
+      [32m+[0m[0m tags                                           = {
+          [32m+[0m[0m "Name"                                     = "ecolibrium-dev-public-subnet-1"
+          [32m+[0m[0m "kubernetes.io/cluster/ecolibrium-dev-eks" = "shared"
+          [32m+[0m[0m "kubernetes.io/role/elb"                   = "1"
+        }
+      [32m+[0m[0m tags_all                                       = {
+          [32m+[0m[0m "Name"                                     = "ecolibrium-dev-public-subnet-1"
+          [32m+[0m[0m "kubernetes.io/cluster/ecolibrium-dev-eks" = "shared"
+          [32m+[0m[0m "kubernetes.io/role/elb"                   = "1"
+        }
+      [32m+[0m[0m vpc_id                                         = (known after apply)
+    }
+
+[1m  # aws_subnet.public_2[0m will be created
+[0m  [32m+[0m[0m resource "aws_subnet" "public_2" {
+      [32m+[0m[0m arn                                            = (known after apply)
+      [32m+[0m[0m assign_ipv6_address_on_creation                = false
+      [32m+[0m[0m availability_zone                              = "ap-south-1b"
+      [32m+[0m[0m availability_zone_id                           = (known after apply)
+      [32m+[0m[0m cidr_block                                     = "10.0.2.0/24"
+      [32m+[0m[0m enable_dns64                                   = false
+      [32m+[0m[0m enable_resource_name_dns_a_record_on_launch    = false
+      [32m+[0m[0m enable_resource_name_dns_aaaa_record_on_launch = false
+      [32m+[0m[0m id                                             = (known after apply)
+      [32m+[0m[0m ipv6_cidr_block_association_id                 = (known after apply)
+      [32m+[0m[0m ipv6_native                                    = false
+      [32m+[0m[0m map_public_ip_on_launch                        = true
+      [32m+[0m[0m owner_id                                       = (known after apply)
+      [32m+[0m[0m private_dns_hostname_type_on_launch            = (known after apply)
+      [32m+[0m[0m tags                                           = {
+          [32m+[0m[0m "Name"                                     = "ecolibrium-dev-public-subnet-2"
+          [32m+[0m[0m "kubernetes.io/cluster/ecolibrium-dev-eks" = "shared"
+          [32m+[0m[0m "kubernetes.io/role/elb"                   = "1"
+        }
+      [32m+[0m[0m tags_all                                       = {
+          [32m+[0m[0m "Name"                                     = "ecolibrium-dev-public-subnet-2"
+          [32m+[0m[0m "kubernetes.io/cluster/ecolibrium-dev-eks" = "shared"
+          [32m+[0m[0m "kubernetes.io/role/elb"                   = "1"
+        }
+      [32m+[0m[0m vpc_id                                         = (known after apply)
+    }
+
+[1m  # aws_vpc.main[0m will be created
+[0m  [32m+[0m[0m resource "aws_vpc" "main" {
+      [32m+[0m[0m arn                                  = (known after apply)
+      [32m+[0m[0m cidr_block                           = "10.0.0.0/16"
+      [32m+[0m[0m default_network_acl_id               = (known after apply)
+      [32m+[0m[0m default_route_table_id               = (known after apply)
+      [32m+[0m[0m default_security_group_id            = (known after apply)
+      [32m+[0m[0m dhcp_options_id                      = (known after apply)
+      [32m+[0m[0m enable_dns_hostnames                 = true
+      [32m+[0m[0m enable_dns_support                   = true
+      [32m+[0m[0m enable_network_address_usage_metrics = (known after apply)
+      [32m+[0m[0m id                                   = (known after apply)
+      [32m+[0m[0m instance_tenancy                     = "default"
+      [32m+[0m[0m ipv6_association_id                  = (known after apply)
+      [32m+[0m[0m ipv6_cidr_block                      = (known after apply)
+      [32m+[0m[0m ipv6_cidr_block_network_border_group = (known after apply)
+      [32m+[0m[0m main_route_table_id                  = (known after apply)
+      [32m+[0m[0m owner_id                             = (known after apply)
+      [32m+[0m[0m tags                                 = {
+          [32m+[0m[0m "Name" = "ecolibrium-dev-vpc"
+        }
+      [32m+[0m[0m tags_all                             = {
+          [32m+[0m[0m "Name" = "ecolibrium-dev-vpc"
+        }
+    }
+
+[1mPlan:[0m [0m22 to add, 0 to change, 0 to destroy.
+
+Changes to Outputs:
+  [32m+[0m[0m aws_region         = "ap-south-1"
+  [32m+[0m[0m ecr_repository_url = "425629233235.dkr.ecr.ap-south-1.amazonaws.com/ecolibrium-flask-app"
+[0m[1maws_iam_role.eks_cluster_role: Creating...[0m[0m
+[0m[1maws_iam_role.eks_nodegroup_role: Creating...[0m[0m
+[0m[1maws_vpc.main: Creating...[0m[0m
+[0m[1maws_eip.nat_eip: Creating...[0m[0m
+[0m[1maws_eip.nat_eip: Creation complete after 1s [id=eipalloc-041d5b76b83795a2c][0m
+[0m[1maws_iam_role.eks_nodegroup_role: Creation complete after 2s [id=ecolibrium-dev-eks-nodegroup-role][0m
+[0m[1maws_iam_role_policy_attachment.cni_policy: Creating...[0m[0m
+[0m[1maws_iam_role_policy_attachment.ecr_policy: Creating...[0m[0m
+[0m[1maws_iam_role_policy_attachment.worker_node_policy: Creating...[0m[0m
+[0m[1maws_iam_role.eks_cluster_role: Creation complete after 2s [id=ecolibrium-dev-eks-cluster-role][0m
+[0m[1maws_iam_role_policy_attachment.eks_cluster_policy: Creating...[0m[0m
+[0m[1maws_iam_role_policy_attachment.cni_policy: Creation complete after 1s [id=ecolibrium-dev-eks-nodegroup-role-20260520132930088800000001][0m
+[0m[1maws_iam_role_policy_attachment.ecr_policy: Creation complete after 1s [id=ecolibrium-dev-eks-nodegroup-role-20260520132930116100000002][0m
+[0m[1maws_iam_role_policy_attachment.worker_node_policy: Creation complete after 1s [id=ecolibrium-dev-eks-nodegroup-role-20260520132930378400000003][0m
+[0m[1maws_iam_role_policy_attachment.eks_cluster_policy: Creation complete after 1s [id=ecolibrium-dev-eks-cluster-role-20260520132930382200000004][0m
+[0m[1maws_vpc.main: Still creating... [00m10s elapsed][0m[0m
+[0m[1maws_vpc.main: Creation complete after 12s [id=vpc-0bdde53393d4065a6][0m
+[0m[1maws_subnet.public_2: Creating...[0m[0m
+[0m[1maws_subnet.private_1: Creating...[0m[0m
+[0m[1maws_internet_gateway.igw: Creating...[0m[0m
+[0m[1maws_subnet.public_1: Creating...[0m[0m
+[0m[1maws_subnet.private_2: Creating...[0m[0m
+[0m[1maws_internet_gateway.igw: Creation complete after 0s [id=igw-02799bf4f5bf32a3e][0m
+[0m[1maws_route_table.public_rt: Creating...[0m[0m
+[0m[1maws_subnet.private_1: Creation complete after 0s [id=subnet-00efcb3ece81a732c][0m
+[0m[1maws_subnet.private_2: Creation complete after 0s [id=subnet-014d16f9b5bcdd427][0m
+[0m[1maws_route_table.public_rt: Creation complete after 1s [id=rtb-08d062aa40524b237][0m
+[0m[1maws_subnet.public_2: Still creating... [00m10s elapsed][0m[0m
+[0m[1maws_subnet.public_1: Still creating... [00m10s elapsed][0m[0m
+[0m[1maws_subnet.public_2: Creation complete after 10s [id=subnet-063a5ce00d9402838][0m
+[0m[1maws_subnet.public_1: Creation complete after 10s [id=subnet-002acf474fa127262][0m
+[0m[1maws_route_table_association.public_2_assoc: Creating...[0m[0m
+[0m[1maws_nat_gateway.nat: Creating...[0m[0m
+[0m[1maws_eks_cluster.main: Creating...[0m[0m
+[0m[1maws_route_table_association.public_1_assoc: Creating...[0m[0m
+[0m[1maws_route_table_association.public_2_assoc: Creation complete after 1s [id=rtbassoc-0ac72a61798fbfce1][0m
+[0m[1maws_route_table_association.public_1_assoc: Creation complete after 1s [id=rtbassoc-0615274a5f287f438][0m
+[0m[1maws_nat_gateway.nat: Still creating... [00m10s elapsed][0m[0m
+[0m[1maws_eks_cluster.main: Still creating... [00m11s elapsed][0m[0m
+[0m[1maws_nat_gateway.nat: Still creating... [00m20s elapsed][0m[0m
+[0m[1maws_eks_cluster.main: Still creating... [00m21s elapsed][0m[0m
+[0m[1maws_nat_gateway.nat: Still creating... [00m30s elapsed][0m[0m
+[0m[1maws_eks_cluster.main: Still creating... [00m31s elapsed][0m[0m
+[0m[1maws_nat_gateway.nat: Still creating... [00m40s elapsed][0m[0m
+[0m[1maws_eks_cluster.main: Still creating... [00m41s elapsed][0m[0m
+[0m[1maws_nat_gateway.nat: Still creating... [00m50s elapsed][0m[0m
+[0m[1maws_eks_cluster.main: Still creating... [00m51s elapsed][0m[0m
+[0m[1maws_nat_gateway.nat: Still creating... [01m00s elapsed][0m[0m
+[0m[1maws_eks_cluster.main: Still creating... [01m01s elapsed][0m[0m
+[0m[1maws_nat_gateway.nat: Still creating... [01m10s elapsed][0m[0m
+[0m[1maws_eks_cluster.main: Still creating... [01m11s elapsed][0m[0m
+[0m[1maws_nat_gateway.nat: Still creating... [01m20s elapsed][0m[0m
+[0m[1maws_eks_cluster.main: Still creating... [01m21s elapsed][0m[0m
+[0m[1maws_nat_gateway.nat: Still creating... [01m30s elapsed][0m[0m
+[0m[1maws_eks_cluster.main: Still creating... [01m31s elapsed][0m[0m
+[0m[1maws_nat_gateway.nat: Creation complete after 1m34s [id=nat-06f947056051e11ea][0m
+[0m[1maws_route_table.private_rt: Creating...[0m[0m
+[0m[1maws_route_table.private_rt: Creation complete after 1s [id=rtb-03e35f3c06982cf03][0m
+[0m[1maws_route_table_association.private_1_assoc: Creating...[0m[0m
+[0m[1maws_route_table_association.private_2_assoc: Creating...[0m[0m
+[0m[1maws_route_table_association.private_1_assoc: Creation complete after 0s [id=rtbassoc-07a1d29baea61d120][0m
+[0m[1maws_route_table_association.private_2_assoc: Creation complete after 0s [id=rtbassoc-055b8866887209109][0m
+[0m[1maws_eks_cluster.main: Still creating... [01m41s elapsed][0m[0m
+[0m[1maws_eks_cluster.main: Still creating... [01m51s elapsed][0m[0m
+[0m[1maws_eks_cluster.main: Still creating... [02m01s elapsed][0m[0m
+[0m[1maws_eks_cluster.main: Still creating... [02m11s elapsed][0m[0m
+[0m[1maws_eks_cluster.main: Still creating... [02m21s elapsed][0m[0m
+[0m[1maws_eks_cluster.main: Still creating... [02m31s elapsed][0m[0m
+[0m[1maws_eks_cluster.main: Still creating... [02m41s elapsed][0m[0m
+[0m[1maws_eks_cluster.main: Still creating... [02m51s elapsed][0m[0m
+[0m[1maws_eks_cluster.main: Still creating... [03m01s elapsed][0m[0m
+[0m[1maws_eks_cluster.main: Still creating... [03m11s elapsed][0m[0m
+[0m[1maws_eks_cluster.main: Still creating... [03m21s elapsed][0m[0m
+[0m[1maws_eks_cluster.main: Still creating... [03m31s elapsed][0m[0m
+[0m[1maws_eks_cluster.main: Still creating... [03m41s elapsed][0m[0m
+[0m[1maws_eks_cluster.main: Still creating... [03m51s elapsed][0m[0m
+[0m[1maws_eks_cluster.main: Still creating... [04m01s elapsed][0m[0m
+[0m[1maws_eks_cluster.main: Still creating... [04m11s elapsed][0m[0m
+[0m[1maws_eks_cluster.main: Still creating... [04m21s elapsed][0m[0m
+[0m[1maws_eks_cluster.main: Still creating... [04m31s elapsed][0m[0m
+[0m[1maws_eks_cluster.main: Still creating... [04m41s elapsed][0m[0m
+[0m[1maws_eks_cluster.main: Still creating... [04m51s elapsed][0m[0m
+[0m[1maws_eks_cluster.main: Still creating... [05m01s elapsed][0m[0m
+[0m[1maws_eks_cluster.main: Still creating... [05m11s elapsed][0m[0m
+[0m[1maws_eks_cluster.main: Still creating... [05m21s elapsed][0m[0m
+[0m[1maws_eks_cluster.main: Still creating... [05m31s elapsed][0m[0m
+[0m[1maws_eks_cluster.main: Still creating... [05m41s elapsed][0m[0m
+[0m[1maws_eks_cluster.main: Still creating... [05m51s elapsed][0m[0m
+[0m[1maws_eks_cluster.main: Still creating... [06m01s elapsed][0m[0m
+[0m[1maws_eks_cluster.main: Still creating... [06m11s elapsed][0m[0m
+[0m[1maws_eks_cluster.main: Still creating... [06m21s elapsed][0m[0m
+[0m[1maws_eks_cluster.main: Still creating... [06m31s elapsed][0m[0m
+[0m[1maws_eks_cluster.main: Still creating... [06m41s elapsed][0m[0m
+[0m[1maws_eks_cluster.main: Still creating... [06m51s elapsed][0m[0m
+[0m[1maws_eks_cluster.main: Still creating... [07m01s elapsed][0m[0m
+[0m[1maws_eks_cluster.main: Still creating... [07m11s elapsed][0m[0m
+[0m[1maws_eks_cluster.main: Still creating... [07m21s elapsed][0m[0m
+[0m[1maws_eks_cluster.main: Still creating... [07m31s elapsed][0m[0m
+[0m[1maws_eks_cluster.main: Creation complete after 7m31s [id=ecolibrium-dev-eks][0m
+[0m[1maws_eks_node_group.main: Creating...[0m[0m
+[0m[1maws_eks_node_group.main: Still creating... [00m10s elapsed][0m[0m
+[0m[1maws_eks_node_group.main: Still creating... [00m20s elapsed][0m[0m
+[0m[1maws_eks_node_group.main: Still creating... [00m30s elapsed][0m[0m
+[0m[1maws_eks_node_group.main: Still creating... [00m40s elapsed][0m[0m
+[0m[1maws_eks_node_group.main: Still creating... [00m50s elapsed][0m[0m
+[0m[1maws_eks_node_group.main: Still creating... [01m00s elapsed][0m[0m
+[0m[1maws_eks_node_group.main: Still creating... [01m10s elapsed][0m[0m
+[0m[1maws_eks_node_group.main: Still creating... [01m20s elapsed][0m[0m
+[0m[1maws_eks_node_group.main: Still creating... [01m30s elapsed][0m[0m
+[0m[1maws_eks_node_group.main: Still creating... [01m40s elapsed][0m[0m
+[0m[1maws_eks_node_group.main: Creation complete after 1m48s [id=ecolibrium-dev-eks:ecolibrium-dev-node-group][0m
+[0m[1m[32m
+Apply complete! Resources: 22 added, 0 changed, 0 destroyed.[0m
+[0m[1m[32m
+Outputs:
+
+[0maws_region = "ap-south-1"
+ecr_repository_url = "425629233235.dkr.ecr.ap-south-1.amazonaws.com/ecolibrium-flask-app"
+[Pipeline] }
+[Pipeline] // dir
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Build Docker Image)
+[Pipeline] sh
++ docker build -t 425629233235.dkr.ecr.ap-south-1.amazonaws.com/ecolibrium-flask-app:latest ./app
+DEPRECATED: The legacy builder is deprecated and will be removed in a future release.
+            Install the buildx component to build images with BuildKit:
+            https://docs.docker.com/go/buildx/
+
+Sending build context to Docker daemon  4.096kB
+Step 1/7 : FROM python:3.13-slim
+3.13-slim: Pulling from library/python
+e4f4b0eb5b0d: Pulling fs layer
+5b4d6ff92fc4: Pulling fs layer
+db744c23eac5: Pulling fs layer
+f3b83f2d9173: Pulling fs layer
+e4f4b0eb5b0d: Download complete
+db744c23eac5: Download complete
+f3b83f2d9173: Download complete
+5b4d6ff92fc4: Download complete
+a8eba3743ebd: Download complete
+1e03019d6a0e: Download complete
+5b4d6ff92fc4: Pull complete
+db744c23eac5: Pull complete
+e4f4b0eb5b0d: Pull complete
+f3b83f2d9173: Pull complete
+Digest: sha256:e544a7fcbdf8555eceda66bf86cafb006c736339f76141918bcb812f3174c00a
+Status: Downloaded newer image for python:3.13-slim
+ ---> e544a7fcbdf8
+Step 2/7 : WORKDIR /app
+ ---> Running in 19d2861278a2
+ ---> Removed intermediate container 19d2861278a2
+ ---> f9d3cd2606e1
+Step 3/7 : COPY requirements.txt .
+ ---> d0c6d5114a44
+Step 4/7 : RUN pip install --no-cache-dir -r requirements.txt
+ ---> Running in f42750f8b5ba
+Collecting Flask==3.1.0 (from -r requirements.txt (line 1))
+  Downloading flask-3.1.0-py3-none-any.whl.metadata (2.7 kB)
+Collecting Werkzeug>=3.1 (from Flask==3.1.0->-r requirements.txt (line 1))
+  Downloading werkzeug-3.1.8-py3-none-any.whl.metadata (4.0 kB)
+Collecting Jinja2>=3.1.2 (from Flask==3.1.0->-r requirements.txt (line 1))
+  Downloading jinja2-3.1.6-py3-none-any.whl.metadata (2.9 kB)
+Collecting itsdangerous>=2.2 (from Flask==3.1.0->-r requirements.txt (line 1))
+  Downloading itsdangerous-2.2.0-py3-none-any.whl.metadata (1.9 kB)
+Collecting click>=8.1.3 (from Flask==3.1.0->-r requirements.txt (line 1))
+  Downloading click-8.4.0-py3-none-any.whl.metadata (2.6 kB)
+Collecting blinker>=1.9 (from Flask==3.1.0->-r requirements.txt (line 1))
+  Downloading blinker-1.9.0-py3-none-any.whl.metadata (1.6 kB)
+Collecting MarkupSafe>=2.0 (from Jinja2>=3.1.2->Flask==3.1.0->-r requirements.txt (line 1))
+  Downloading markupsafe-3.0.3-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.7 kB)
+Downloading flask-3.1.0-py3-none-any.whl (102 kB)
+Downloading blinker-1.9.0-py3-none-any.whl (8.5 kB)
+Downloading click-8.4.0-py3-none-any.whl (116 kB)
+Downloading itsdangerous-2.2.0-py3-none-any.whl (16 kB)
+Downloading jinja2-3.1.6-py3-none-any.whl (134 kB)
+Downloading markupsafe-3.0.3-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (22 kB)
+Downloading werkzeug-3.1.8-py3-none-any.whl (226 kB)
+Installing collected packages: MarkupSafe, itsdangerous, click, blinker, Werkzeug, Jinja2, Flask
+
+Successfully installed Flask-3.1.0 Jinja2-3.1.6 MarkupSafe-3.0.3 Werkzeug-3.1.8 blinker-1.9.0 click-8.4.0 itsdangerous-2.2.0
+[91mWARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+[0m[91m
+[notice] A new release of pip is available: 26.0.1 -> 26.1.1
+[notice] To update, run: pip install --upgrade pip
+[0m ---> Removed intermediate container f42750f8b5ba
+ ---> 3fd83be9c1ae
+Step 5/7 : COPY . .
+ ---> bfca4836ec07
+Step 6/7 : EXPOSE 5000
+ ---> Running in 81465636bb5c
+ ---> Removed intermediate container 81465636bb5c
+ ---> 68c9ac690b71
+Step 7/7 : CMD ["python", "app.py"]
+ ---> Running in 5feca6eb6cba
+ ---> Removed intermediate container 5feca6eb6cba
+ ---> c35179a7cd5e
+Successfully built c35179a7cd5e
+Successfully tagged 425629233235.dkr.ecr.ap-south-1.amazonaws.com/ecolibrium-flask-app:latest
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Login to Amazon ECR)
+[Pipeline] sh
++ aws ecr get-login-password --region ap-south-1
++ docker login --username AWS --password-stdin 425629233235.dkr.ecr.ap-south-1.amazonaws.com
+
+WARNING! Your credentials are stored unencrypted in '/var/lib/jenkins/.docker/config.json'.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/go/credential-store/
+
+Login Succeeded
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Push Docker Image)
+[Pipeline] sh
++ docker push 425629233235.dkr.ecr.ap-south-1.amazonaws.com/ecolibrium-flask-app:latest
+The push refers to repository [425629233235.dkr.ecr.ap-south-1.amazonaws.com/ecolibrium-flask-app]
+735a63e84ef0: Waiting
+e4f4b0eb5b0d: Waiting
+5b4d6ff92fc4: Waiting
+db744c23eac5: Waiting
+f3b83f2d9173: Waiting
+df0435c2431d: Waiting
+ea53b10625cb: Waiting
+9c9e249af1c7: Waiting
+df0435c2431d: Pushed
+ea53b10625cb: Pushed
+735a63e84ef0: Pushed
+e4f4b0eb5b0d: Pushed
+db744c23eac5: Pushed
+9c9e249af1c7: Pushed
+f3b83f2d9173: Pushed
+5b4d6ff92fc4: Pushed
+latest: digest: sha256:c35179a7cd5e48bd9f45f97355fae2bbc2fe611b39ad973a0e36f5143ef9ad70 size: 2054
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Update kubeconfig)
+[Pipeline] sh
++ aws eks update-kubeconfig --region ap-south-1 --name ecolibrium-dev-eks
+Added new context arn:aws:eks:ap-south-1:425629233235:cluster/ecolibrium-dev-eks to /var/lib/jenkins/.kube/config
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Deploy using Helm)
+[Pipeline] sh
++ cd helm/flask-app
++ helm upgrade --install flask-app .
+Release "flask-app" does not exist. Installing it now.
+NAME: flask-app
+LAST DEPLOYED: Wed May 20 13:39:31 2026
+NAMESPACE: default
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Verify Deployment)
+[Pipeline] sh
++ kubectl get nodes
+NAME                                        STATUS   ROLES    AGE   VERSION
+ip-10-0-3-134.ap-south-1.compute.internal   Ready    <none>   71s   v1.33.11-eks-7fcd7ec
+ip-10-0-4-107.ap-south-1.compute.internal   Ready    <none>   69s   v1.33.11-eks-7fcd7ec
++ kubectl get pods
+NAME                        READY   STATUS              RESTARTS   AGE
+flask-app-b9c748b54-lctd8   0/1     ContainerCreating   0          3s
+flask-app-b9c748b54-zc5k5   0/1     ContainerCreating   0          3s
++ kubectl get svc
+NAME                TYPE           CLUSTER-IP      EXTERNAL-IP                                                               PORT(S)          AGE
+flask-app-service   LoadBalancer   172.20.44.229   a72bfb75fabd347d1b33d49f9fab73ce-150948876.ap-south-1.elb.amazonaws.com   5000:32439/TCP   4s
+kubernetes          ClusterIP      172.20.0.1      <none>                                                                    443/TCP          3m55s
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS
